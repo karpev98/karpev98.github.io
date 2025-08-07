@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Super Resolution for Humans</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:image" content="https://jonbarron.info/mipnerf360/img/gardenvase.jpg">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1296">
+    <meta property="og:image:height" content="840">
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://jonbarron.info/mipnerf360/" />
+    <meta property="og:title" content="Mip-NeRF 360: Unbounded Anti-Aliased Neural Radiance Fields" />
+    <meta property="og:description"
+        content="Though neural radiance fields (NeRF) have demonstrated impressive view synthesis results on objects and small bounded regions of space, they struggle on 'unbounded' scenes, where the camera may point in any direction and content may exist at any distance. In this setting, existing NeRF-like models often produce blurry or low-resolution renderings (due to the unbalanced detail and scale of nearby and distant objects), are slow to train, and may exhibit artifacts due to the inherent ambiguity of the task of reconstructing a large scene from a small set of images. We present an extension of mip-NeRF (a NeRF variant that addresses sampling and aliasing) that uses a non-linear scene parameterization, online distillation, and a novel distortion-based regularizer to overcome the challenges presented by unbounded scenes. Our model, which we dub 'mip-NeRF 360' as we target scenes in which the camera rotates 360 degrees around a point, reduces mean-squared error by 54% compared to mip-NeRF, and is able to produce realistic synthesized views and detailed depth maps for highly intricate, unbounded real-world scenes." />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Mip-NeRF 360: Unbounded Anti-Aliased Neural Radiance Fields" />
+    <meta name="twitter:description"
+        content="Though neural radiance fields (NeRF) have demonstrated impressive view synthesis results on objects and small bounded regions of space, they struggle on 'unbounded' scenes, where the camera may point in any direction and content may exist at any distance. In this setting, existing NeRF-like models often produce blurry or low-resolution renderings (due to the unbalanced detail and scale of nearby and distant objects), are slow to train, and may exhibit artifacts due to the inherent ambiguity of the task of reconstructing a large scene from a small set of images. We present an extension of mip-NeRF (a NeRF variant that addresses sampling and aliasing) that uses a non-linear scene parameterization, online distillation, and a novel distortion-based regularizer to overcome the challenges presented by unbounded scenes. Our model, which we dub 'mip-NeRF 360' as we target scenes in which the camera rotates 360 degrees around a point, reduces mean-squared error by 54% compared to mip-NeRF, and is able to produce realistic synthesized views and detailed depth maps for highly intricate, unbounded real-world scenes." />
+    <meta name="twitter:image" content="https://jonbarron.info/mipnerf360/img/gardenvase.jpg" />
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💫</text></svg>">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.css">
+    <link rel="stylesheet" href="css/app.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.8.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.3/clipboard.min.js"></script>
+
+    <script src="js/app.js"></script>
+</head>
+
+<body>
+    <div class="container" id="main">
+        <div class="row">
+            <h2 class="col-md-12 text-center">
+                <b>Super Resolution for Humans</b><br>
+                <small>
+                    SIGGRAPH 2025 (Poster)
+                </small>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="list-inline">
+                    <li>
+                        <a href="https://karpev98.github.io">
+                            Volodymyr Karpenko
+                        </a>
+                        </br>Università della Svizzera italiana
+                    </li>
+                    <li>
+                        <a href="https://taimoor6864.github.io">
+                            Taimoor Tariq
+                        </a>
+                        </br>Università della Svizzera italiana
+                    </li>
+                    <li>
+                        <a href="https://arcanous98.github.io">
+                            Jorge Condor
+                        </a>
+                        </br>Università della Svizzera italiana
+                    </li><br>
+                    <li>
+                        <a href="https://www.pdf.inf.usi.ch/people/piotr/">
+                            Piotr Didyk
+                        </a>
+                        </br>Università della Svizzera italiana
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center">
+                <ul class="nav nav-pills nav-justified">
+                    <li>
+                        <a href="https://dl.acm.org/doi/abs/10.1145/3721250.3742985">
+                            <image src="img/360_paper_image.jpg" height="60px">
+                                <h4><strong>Paper</strong></h4>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <image src="img/github.png" height="60px">
+                                <h4><strong>Code (Coming soon)</strong></h4>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <img src="img/image21-6_compressed.pdf" width="100%" />
+            </div>
+            <div class="col-md-8 col-md-offset-2">
+                <p class="text-center">
+                    Our perceptually accelerated method can achieve perceptually lossless acceleration for neural
+                    network based SR
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Abstract
+                </h3>
+                <p class="text-justify">
+                    Super-resolution (SR) is crucial for delivering high-quality content at lower bandwidths and
+                    supporting modern display demands in VR and AR.
+                    Unfortunately, state-of-the-art neural network SR methods remain computationally expensive.
+                    Our key insight is to leverage the limitations of the human visual system (HVS) to selectively
+                    allocate computational resources, such that perceptually important image regions, identified by our
+                    low-level perceptual model, are processed by more demanding SR methods, while less critical areas
+                    use simpler methods.
+                    This approach, inspired by content-aware foveated rendering, optimizes efficiency without
+                    sacrificing perceived visual quality.
+                    User studies and quantitative results demonstrate that our method achieves a reduction in
+                    computational requirements with no perceptible quality loss. The technique is architecture-agnostic
+                    and well-suited for VR/AR, where focusing effort on foveal vision offers significant computational
+                    savings.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Method Predictions
+                </h3>
+                <img src="img/image1-78_compressed.pdf" width="100%" />
+                <p class="text-center">
+                    Visual results of our method compared to the original networks. On the right, we can observe the maps produced by our perceptual model.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    VR Application
+                </h3>
+
+                <img src="img/eccentricity_maps.pdf" width="100%" />
+                <p class="text-center">
+                    Our model predictions based on gaze position with X4 super-resolution. In the first column, we have the original image and the corresponding quality map. In the other columns we have on top the eccentricity map expressed in degrees and bottom we have the corresponding quality map.
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    User study results
+                </h3>
+
+                <img src="img/user_preference-4.pdf" width="100%" /> 
+                <p class="text-center">
+                    The result of our user study (15 subjects) for the network branching application with 24 natural images.
+                </p>
+                <br><br>
+                <img src="img/user_preference_edsr.pdf" width="100%" />
+                <p class="text-center">
+                    The result of our subjective study (for 9 participants) for the network channel depth application.
+                </p>
+            </div>
+        </div>
+
+         <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Additional Results
+                </h3>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <h3>
+                    Citation
+                </h3>
+                <div class="form-group col-md-10 col-md-offset-1">
+                    <textarea id="bibtex" class="form-control" readonly>
+@inproceedings{10.1145/3721250.3742985,
+    author = {Karpenko, Volodymyr and Tariq, Taimoor and Condor, Jorge and Didyk, Piotr},
+    title = {Super Resolution for Humans},
+    year = {2025},
+    isbn = {9798400715495},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/3721250.3742985},
+    doi = {10.1145/3721250.3742985},
+    booktitle = {Proceedings of the Special Interest Group on Computer Graphics and Interactive Techniques Conference Posters},
+    articleno = {53},
+    numpages = {3},
+    location = {
+    },
+    series = {SIGGRAPH Posters '25}
+}</textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
